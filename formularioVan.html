@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Formulario Cadastro Van</title>
+	<link rel="stylesheet" href="style.css" media="all" />
+	<script type="text/javascript">
+    </script>
+    <style>
+    </style>
+   
+</head>
+<body>
+<div id="tudo" align="center">
+<div class="topo"></div>
+<div id="conteudo">
+	
+	<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
+	
+	<form action="inserindoDados.php" method="POST" class="alinhar">
+		<fieldset>
+			<h1>Dados do Veiculo</h1>
+			<input type="text" name="PLACA" placeholder="Placa   (3 letras e 4 números)"/><br />
+			<input type="text" name="CHASSI" placeholder="Chassi   (11 números)"/><br />
+			<p class="submit">
+			<input type="submit" name="enviar" value="Enviar"/>
+			<input type="reset" name="limpar" value="Limpar" />
+			<input type="button" onclick="location.href='paginaMotorista.php';" value="Voltar" />
+		</p>
+		</fieldset>
+	</form>
+	<hr />
+</div>
+</div>
+</body>
+</html>

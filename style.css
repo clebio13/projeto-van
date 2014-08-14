@@ -1,0 +1,128 @@
+body {
+
+	padding: 0;
+	margin: 0;
+	font-size: 13px;
+	font-family: arial, Tahoma, sans-serif;
+}
+#tudo {
+	width: auto;
+	height: 1000px;
+	margin:0 auto;
+	/*border: 2px #333 solid; div com bordas 2px e cor para identificar o tamanho da página*/
+}
+
+.topo{  /*faixa superior */
+	width:auto;
+	height: 60px;
+	background: #123C3D;
+}
+
+#conteudo{ /* espço para conteúdo*/
+	width: 65%;
+	height: 100%;
+	padding: 5px;
+	text-align: center;
+	/*border: 2px #333 solid;*/
+	align: center;
+}
+.alinhar{
+	text-align: center;
+	padding-left: 30%;
+
+}
+
+
+fieldset { 
+	width: 310px; /*comprimento dos campo input do form*/
+	border:1px solid #999;
+    border-radius: 5px; /*arrendondar bordas do form*/
+    box-shadow:0 0 10px #999;
+	
+}
+table{ 
+	font-size:1.2em; 
+	border-collapse:collapse;
+	box-shadow:0 0 10px #999;
+	border-radius:8px;
+	font-family: Arial, Helvetica, sans-serif;
+	width: 56%;
+
+}
+.tabelaGerencia{
+
+	border:1px solid #999;
+    border-radius:8px;
+    box-shadow:0 0 10px #999;
+	width: 70%;
+	border-width: medium; 	
+}
+
+a { color:#000; }
+
+hr {
+      color: #f00;
+      background-color: #123C3D;
+      height: 5px;
+    }
+
+h1,h2 {
+	margin-bottom: 20px;
+	color: #123C3D;
+	text-align: center;
+}
+
+
+input {
+	padding: 10px;
+	border: 1px solid #E5E5E5;
+	width: 300px;
+	color: #999999;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;	
+}
+	
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+	border-color: 1px solid #C9C9C9;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+	opacity 0.9;
+}
+
+
+
+.submit input {
+	width: 100px; 
+	height: 40px;
+	background-color: #123C3D; 
+	color: #FFF;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;		
+}
+.botaoAdmin input {
+	width: 300px; 
+	height: 40px;
+	background-color: #123C3D; 
+	color: #FFF;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;		
+}
+.botaoAdmin input:hover {
+	width: 310px; 
+	height: 45px;
+	background-color: #123C3D; 
+	color: #999;
+		
+}
+/*novo: quando passar o mause os botões aumentrão.*/
+.submit input:hover {
+	width: 110px; 
+	height: 50px;
+	opacity: 1;
+}
