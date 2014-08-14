@@ -9,6 +9,9 @@
 	<div class="tudo" align="center">
 		<div class="topo"></div>
 		<div class="conteudo">
+		
+		<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
+		
 			<p><h1 align="center">MOTORISTAS</h1></p>
 			<table border="2">
 			<tr bgcolor="#CCCCCC"> 
@@ -41,6 +44,10 @@
 	mysql_close($conexao);
 ?>
 	</table>
+	
+		<br/>
+		<br/>
+		
 		<form method="POST"  action= "excluirCadastro.php" >
 			<fieldset>
 				<h2>Excluir Cadastro: </h2>
