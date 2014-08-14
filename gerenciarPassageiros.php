@@ -9,6 +9,8 @@
 	<div class="tudo" align="center">
 	<div class="topo"></div>
 		<div class="conteudo">
+		
+		<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
 				
 			<p><h1>PASSAGEIROS</h1></p>
 			<table width="30%" border="1">
@@ -36,6 +38,9 @@
 	mysql_close($conexao);
 ?>
 		</table>
+		
+		<br />
+		<br />
 		
 			<div>
 			<form method="POST"  action= "excluirCadastro.php">
