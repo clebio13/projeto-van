@@ -15,7 +15,8 @@
 			<p><h1 align="center">MOTORISTAS</h1></p>
 			<table border="2">
 			<tr bgcolor="#CCCCCC"> 
-			<td >Nome Usuario</td>	    
+			<td >Nome Usuario</td>	 
+			<td >CNH</td>	    
 			</tr>
 		
 <?php	
@@ -28,16 +29,19 @@
 		header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
 	}
 
-	$strSQL = "SELECT * FROM usuario WHERE TIPO= 'motorista'";
+	$strSQL = "SELECT * FROM MOTORISTA";
 
 	$rs = mysql_query($strSQL);	
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
 	while($row = mysql_fetch_array($rs,MYSQL_BOTH)) {
 		$Nomeusuario = $row['NOME_USUARIO'];
+		$cnh = $row['CNH'];
+		
 
 	  	echo "
 		<tr> 
 	    <td>$Nomeusuario</td>
+	    <td>$cnh</td>
 	  	</tr>";	
 	}
 	// Encerra a conexão
@@ -53,7 +57,7 @@
 				<h2>Excluir Cadastro: </h2>
 				<p>
 				<input type="text" name="NOME_USUARIO" placeholder="Nome de Usuario" />
-				<input type="text" name="TIPO" value="motorista" readonly><br/>
+				<input type="text" name="CNH" placeholder="CNH" />
 				</p>		
 	
 				<p class="botaoAdmin">
