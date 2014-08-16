@@ -21,14 +21,12 @@
 			<td >ID</td>
 			<td >Nome Usuario</td>
 			<td >Senha</td>
-			<td >Nome</td>
+			<td >Email</td>
+			<td >Nome Completo</td>
 			<td >Endereco</td>
 			<td>Telefone1</td>
 			<td>Telefone2</td>
-			<td>Tipo</td>
-		</tr>
-		
-		
+		</tr>		
 <?php	
 
 	session_start();
@@ -40,31 +38,30 @@
 		header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
 	}
 
-	$strSQL = "SELECT * FROM usuario WHERE TIPO = 'passageiro'";
+	$strSQL = "SELECT * FROM PASSAGEIRO";
 
 	$rs = mysql_query($strSQL);	
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
 	while($row = mysql_fetch_array($rs,MYSQL_BOTH)) {
-		$idPassageiro = $row['ID_USUARIO'];
-		$Nomeusuario = $row['NOME_USUARIO'];
+		$idPassageiro = $row['ID_PASSAGEIRO'];
+		$nomeusuario = $row['NOME_USUARIO'];
 		$senha = $row['SENHA'];
-		$nome = $row['NOME'];
+		$email = $row['EMAIL'];
+		$nomeCompleto = $row['NOME_COMPLETO'];
 		$endereco = $row['ENDERECO'];
 		$telefone1 = $row['TELEFONE1'];
 		$telefone2 = $row['TELEFONE2'];
-		$cnh = $row['CNH'];
-		$tipo = $row['TIPO'];
 
 	  	echo "
 		<tr> 
 	    <td>$idPassageiro</td>
-	    <td>$Nomeusuario</td>
+	    <td>$nomeusuario</td>
 	    <td>$senha</td>
-	    <td>$nome</td>
+	    <td>$email</td>
+	    <td>$nomeCompleto</td>
 	    <td>$endereco</td>
 	  	<td>$telefone1</td>
 	  	<td>$telefone2</td>
-	  	<td>$tipo</td>
 	  	</tr>";	
 	}
 	// Encerra a conexão
@@ -83,4 +80,4 @@
 	</div>
 </div>
 </body>
-</html>
+</html>	
