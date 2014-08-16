@@ -22,7 +22,7 @@
 	include ("conexao.php");
 
 
-	$strSQL = "SELECT * FROM usuario WHERE TIPO= 'passageiro'";
+	$strSQL = "SELECT * FROM PASSAGEIRO";
 
 	$rs = mysql_query($strSQL);	
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
@@ -48,7 +48,6 @@
 					<h2>Excluir Cadastro: </h2>
 					<p>
 						<input type="text" name="NOME_USUARIO" placeholder="Nome de Usuario" />
-						<input type="text" name="TIPO" value="passageiro" readonly><br/>
 					</p>		
 	
 					<p class="botaoAdmin">
