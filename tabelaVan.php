@@ -16,8 +16,11 @@
 			<p><h1 >VANS</h1></p>
 			<table border="1" align="center">
 			<tr bgcolor="#CCCCCC"> 
+				<td >ID Van</td>
 				<td >Placa</td>
 				<td >Chassi</td>
+				<td >Ano</td>
+				<td >ID Motorista</td>
 			</tr>
 		
 <?php
@@ -29,18 +32,24 @@
 		header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
 	}
 	
-	$strSQL = "SELECT * FROM van";
+	$strSQL = "SELECT * FROM VAN";
 
 	$rs = mysql_query($strSQL);	
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
 	while($row = mysql_fetch_array($rs,MYSQL_BOTH)) {
+		$idvan = $row['ID_VAN'];
 		$placa = $row['PLACA'];
 		$chassi = $row['CHASSI'];
-	
+		$ano = $row['ANO'];
+		$idmotorista = $row['ID_MOTORISTA'];
+
 	  	echo "
-		<tr> 
+		<tr>
+		<td>$idvan</td> 
 	    <td>$placa</td>
 	    <td>$chassi</td>
+	    <td>$ano</td>
+	    <td>$idmotorista</td>
 	  	</tr>";	
 	}
 	// Encerra a conexão
