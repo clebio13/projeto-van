@@ -15,7 +15,7 @@
 
 	<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
 	
-	<form action="inserindoDados.php" method="POST" class="alinhar">
+	<form action="inserindoDadosPassageiro.php" method="POST" class="alinhar">
 		<fieldset>
 			<h1>Criar conta</h1><br/>
 			Nome usuário   (6 - 12 letras e números):<br />
@@ -25,15 +25,13 @@
 			Email: <br />
 			<input type="text" name="EMAIL" placeholder=""/><br /><br />
 			Nome Completo:<br />
-			<input type="text" name="NOME" placeholder=""/><br /><br />
+			<input type="text" name="NOME_COMPLETO" placeholder=""/><br /><br />
 			Endereço (Cidade, rua, número): <br/>
 			<input type="text" name="ENDERECO" placeholder=""/><br /><br />
 			Telefone1:<br />
 			<input type="text" name="TELEFONE1" placeholder=""/><br /><br />
 			Telefone 2: <br />
-			<input type="text" name="TELEFONE2" placeholder=""/><br /><br />
-			Cadastrar-se como: <br/>
-			<input type="text" name="TIPO" value="Passageiro" readonly><br/>
+			<input type="text" name="TELEFONE2" placeholder=""/><br />
 			<p class="submit">
 			<input type="submit" name="enviar" value="Enviar"/>
 			<input type="reset" name="limpar" value="Limpar" />
