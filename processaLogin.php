@@ -7,37 +7,50 @@ if (isset($_POST['login']) && isset($_POST['senha'])) {
 $login = $_POST['login'];
 $senha = $_POST['senha'];
 
-	$logininok = false;
+	$logininOkAdministrador = false;
+	$logininOkMotorista = false;
+	$logininOkPassageiro = false;
 
-	$sql = mysql_query("SELECT * FROM usuario WHERE NOME_USUARIO = '$login' AND SENHA = '$senha'");
+	$sql = mysql_query("SELECT * FROM ADMINISTRADOR WHERE NOME_USUARIO = '$login' AND SENHA = '$senha'");
 
 	while ($row = mysql_fetch_array($sql,MYSQL_BOTH)) {
-		$loginok = true;
+		$logininOkAdministrador = true;
+	}
+
+	$sql2 = mysql_query("SELECT * FROM MOTORISTA WHERE NOME_USUARIO = '$login' AND SENHA = '$senha'");
+
+	while ($row = mysql_fetch_array($sql2,MYSQL_BOTH)) {
+		$logininOkMotorista = true;
+	}
+
+	$sql3 = mysql_query("SELECT * FROM PASSAGEIRO WHERE NOME_USUARIO = '$login' AND SENHA = '$senha'");
+
+	while ($row = mysql_fetch_array($sql3,MYSQL_BOTH)) {
+		$logininOkPassageiro = true;
 	}
 }
 
 if($login == 'ifrn' AND $senha == 'tads'){
-	$loginok=true;
-	//$_SESSION['auth'] = true;
+	$logininOkAdministrador=true;
 }	
 
 mysql_close($conexao);
 
-if ($loginok) {
+if ($logininOkAdministrador) {
+	session_start();
+	$_SESSION['auth'] = true;
+	header('LOCATION:paginaAdministrador.html');
 
-	if($login == 'ifrn' AND $senha == 'tads'){
+}else if($logininOkMotorista){
 		session_start();
 		$_SESSION['auth'] = true;
-		header('LOCATION:paginaAdministrador.html');
-	}else if($tipo == 'passageiro'){
+		header('LOCATION:paginaMotorista.php');
+
+}else if($logininOkPassageiro){
 		session_start();
 		$_SESSION['auth'] = true;
 		header('LOCATION:paginaPassageiro.php');		
-	}else{
-		session_start();
-		$_SESSION['auth'] = true;
-		header('LOCATION:paginaMotorista.php');		
-	}
+	
 
 }else{
 	header('LOCATION:index.html?msg=FALHOU');
