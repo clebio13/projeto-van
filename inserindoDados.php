@@ -21,7 +21,6 @@ $cnh = $_POST['CNH'];
 
 	if(mysql_num_rows($busca2) == 1){
 			
-		echo "<script>alert('Nome de Usuario ja Existe. Tente Novamente!');top.location.href='index.html';</script>";
 
 	}else{
 
