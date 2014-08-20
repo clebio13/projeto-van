@@ -43,7 +43,7 @@ $cnh = $_POST['CNH'];
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
 	while($row = mysql_fetch_array($motorista,MYSQL_BOTH)) {// identificando o motorista da seçao 
 		if ($row['NOME_USUARIO'] == $Nomeusuario) {
-			$nome = $row['ID_MOTORISTA']; //acessando o id da tabela motorista da seçao	
+			$id = $row['ID_MOTORISTA']; //acessando o id da tabela motorista da seçao	
 		}
 		
 	}
@@ -51,7 +51,7 @@ $cnh = $_POST['CNH'];
 	$placa = $_POST['PLACA'];
 	$chassi = $_POST['CHASSI'];
 	$ano = $_POST['ANO'];
-	$IdMotorista = $nome; //inserindo o id do motorista 
+	$IdMotorista = $id; //inserindo o id do motorista 
 
 	$busca2 = mysql_query("SELECT * FROM VAN WHERE PLACA = '$placa'") or die(mysql_error());
 	echo "<br />";
@@ -68,7 +68,43 @@ $cnh = $_POST['CNH'];
 
 		header('location:paginaMotorista.php');
 	}
+}else if(isset($_POST['CIDADE_ORIGEM']) && isset($_POST['CIDADE_DESTINO'])){ //usado para inserir os dados da van no banco de dados
+	$Nomeusuario = $_POST['NOME'];
+	
+	$listaMotoristas = "SELECT * FROM MOTORISTA";
+
+	$motorista = mysql_query($listaMotoristas);	
+	// Cada linha vai para um array ($row) usando mysql_fetch_array
+	while($row = mysql_fetch_array($motorista,MYSQL_BOTH)) {// identificando o motorista da seçao 
+		if ($row['NOME_USUARIO'] == $Nomeusuario) {
+			$id = $row['ID_MOTORISTA']; //acessando o id da tabela motorista da seçao	
+		}
+		
+	}
+
+	$IdMotorista = $id; //inserindo o id do motorista 
+	$cidadeOrigem = $_POST['CIDADE_ORIGEM'];
+	$cidadeDestino = $_POST['CIDADE_DESTINO'];
+	$preco = $_POST['PRECO'];
+	
+
+	/*$busca2 = mysql_query("SELECT * FROM ROTA WHERE PLACA = '$placa'") or die(mysql_error());
+	echo "<br />";
+	if(mysql_num_rows($busca2) == 1){
+		echo "<script>alert('A van com essa placa ja esta cadastrada. Tente Novamente!');top.location.href='formularioVan.html';</script>";
+
+	}else{*/
+
+		$inserir2 = 'INSERT INTO ROTA 
+		VALUES ("","'.$IdMotorista.'","'.$cidadeOrigem.'","'.$cidadeDestino.'","'.$preco.'")';
+
+		mysql_query($inserir2,$conexao)or die("Erro!".mysql_error());
+		mysql_close($conexao);
+
+		header('location:paginaMotorista.php');
+	//}
 }
+
 ?>
 
 
