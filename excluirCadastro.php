@@ -53,15 +53,33 @@ if (isset($_POST['NOME_USUARIO']) && isset($_POST['CNH'])) { //usado para exclui
 	if(mysql_num_rows($busca3 < 1)){
 		echo "<script>alert('Veiculo com a placa digitada nao esta cadastrado no sistema!');top.location.href='paginaAdministrador.html';</script>";		
 	}else{
-		$delete3 = "DELETE FROM van WHERE PLACA ='$placa'";
+		$delete3 = "DELETE FROM VAN WHERE PLACA ='$placa'";
 
 		mysql_query($delete3)or die("Erro!".mysql_error());
 		mysql_close($conexao);
 
-		header('location:paginaMotorista.html');
+		header('location:paginaMotorista.php');
+	}
+
+}else if(isset($_POST['ID_ROTA'])) { //usado para excluir cadastro de vans
+
+	$idRota = $_POST['ID_ROTA'];
+
+	$busca3 = mysql_query("SELECT * FROM ROTA WHERE ID_ROTA = '$idRota'") or die(mysql_error());
+
+	if(mysql_num_rows($busca3 < 1)){
+		echo "<script>alert('A rota nao esta cadastrada no sistema!');top.location.href='paginaAdministrador.html';</script>";		
+	}else{
+		$delete3 = "DELETE FROM ROTA WHERE ID_ROTA ='$idRota'";
+
+		mysql_query($delete3)or die("Erro!".mysql_error());
+		mysql_close($conexao);
+
+		header('location:paginaMotorista.php');
 	}
 
 }
 
 ?>
+
 

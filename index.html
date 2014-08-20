@@ -14,7 +14,7 @@
 	
 	<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
 	
-	<form name="form" action= "processaLogin.php" id="form"  class="alinhar" method="POST">
+	<form method="POST"  action= "processaLogin.php" id="form"  class="alinhar">
 		<fieldset>
 			<h2>Entrar</h2>
 			<p>
@@ -23,7 +23,7 @@
 			</p>		
 	
 			<p class="submit">
-				<input type="submit" value="Login"/>
+				<input type="submit" value="Login" onclick="validaForm()"/>
 				<input type="reset" name="limpar" value="Limpar" />
 			</p >
 		</fieldset>

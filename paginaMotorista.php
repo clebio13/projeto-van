@@ -4,15 +4,7 @@
 	<meta  charset="utf-8" />
 	<title>Pagina Motorista</title>
 	<link rel="stylesheet" href="style.css"  media="all" />
-<script type="text/javascript"> 
-function redirecionar(){ 
-if(confirm("Tem certeza que deseja sair do sistema?")){
-location.href='logout.php'; 
-}else{
-location.href='paginaMotorista.php';
-} 
-} 
-</script>
+
 </head>
 <body>
 	<div id="tudo" align="center">
@@ -27,9 +19,10 @@ location.href='paginaMotorista.php';
 			<p class="botaoAdmin">
 				<input type="button" onclick="location.href='formularioVan.html';" value="CADASTRAR VANS" /><br />
 				<input type="button" onclick="location.href='tabelaVan.php';" value="EXIBIR CADASTRO DE VANS" /><br />
-				<!-- <input type="button" onclick="location.href='';" value="GERENCIAR ROTAS E PREÇOS" /><br />
-				<input type="button" onclick="location.href='';" value="CONSULTAR PASSAGENS VENDIDAS" /><br /> -->
-				<input type="button" onclick="redirecionar();" value="SAIR" />
+				<input type="button" onclick="location.href='formularioRotas.html';" value="CADASTRAR ROTAS E PREÇOS" /><br />
+				<input type="button" onclick="location.href='tabelaRotas.php';" value="EXIBIR TABELA DE ROTAS" /><br />
+				<!-- <input type="button" onclick="location.href='';" value="CONSULTAR PASSAGENS VENDIDAS" /><br /> -->
+				<input type="button" onclick="location.href='logout.php';" value="SAIR" />
 			</p>
 </fieldset>
 </form>

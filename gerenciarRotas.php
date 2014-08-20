@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta  charset="utf-8" />
-	<title>Gerenciar Vans</title>
+	<title>Gerenciar Rotas</title>
 	<link rel="stylesheet" href="style.css"  media="all" />
 </head>
 <body>
@@ -15,8 +15,9 @@
 			<p><h1 align="center">Vans</h1></p>
 			<table border="2">
 			<tr bgcolor="#CCCCCC"> 
-			<td >Nome Usuario</td>	 
-			<td >ID Motorista</td>	    
+			<td >ID Rota</td>	 
+			<td >Cidade Origem</td>	    
+			<td >Cidade Destino</td>	    
 			</tr>
 		
 <?php	
@@ -29,18 +30,20 @@
 		header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
 	}
 	
-	$strSQL = "SELECT * FROM VAN";
+	$strSQL = "SELECT * FROM ROTA";
 
 	$rs = mysql_query($strSQL);	
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
 	while($row = mysql_fetch_array($rs,MYSQL_BOTH)) {
-		$placa = $row['PLACA'];
-		$id = $row['ID_MOTORISTA'];
+		$id = $row['ID_ROTA'];
+		$cidadeOrigem = $row['CIDADE_ORIGEM'];
+		$cidadeDestino = $row['CIDADE_DESTINO'];
 
 	  	echo "
 		<tr> 
-	    <td>$placa</td>
 	    <td>$id</td>
+	    <td>$cidadeOrigem</td>
+	    <td>$cidadeDestino</td>
 	  	</tr>";	
 	}
 	// Encerra a conexão
@@ -54,13 +57,13 @@
 			<fieldset>
 				<h2>Excluir Cadastro: </h2>
 				<p>
-				<input type="text" name="PLACA" placeholder="PLACA" />
+				<input type="text" name="ID_ROTA" placeholder="ID DA ROTA" />
 				</p>		
 	
 				<p class="botaoAdmin">
 					<input type="submit" value="Excluir" />
 					<input type="reset" name="limpar" value="Limpar" />
-					<input type="button" onclick="location.href='paginaAdministrador.php';" value="Voltar" />
+					<input type="button" onclick="location.href='paginaMotorista.php';" value="Voltar" />
 				</p >
 			</fieldset>
 		</form>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Formulario Cadastro Rotas e Preços</title>
+	<link rel="stylesheet" href="style.css" media="all" />
+	<script type="text/javascript">
+    </script>
+    <style>
+    </style>
+   
+</head>
+<body>
+<div id="tudo" align="center">
+<div class="topo"></div>
+<div id="conteudo">
+	
+	<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
+	
+	<form action="inserindoDados.php" method="POST" class="alinhar">
+		<fieldset>
+			<h1>Dados da Rota</h1>
+			<input type="text" name="CIDADE_ORIGEM" placeholder="Cidade Origem "/><br />
+			<input type="text" name="CIDADE_DESTINO" placeholder="Cidade Destino "/><br />
+			<input type="text" name="PRECO" placeholder="PRECO"/><br />
+			<input type="text" name="NOME" placeholder="Nome Motorista  (4 números)"/><br />
+			<p class="submit">
+			<input type="submit" name="enviar" value="Enviar"/>
+			<input type="reset" name="limpar" value="Limpar" />
+			<input type="button" onclick="location.href='paginaMotorista.php';" value="Voltar" />
+		</p>
+		</fieldset>
+	</form>
+	<hr />
+</div>
+</div>
+</body>
+</html>
