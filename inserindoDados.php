@@ -21,7 +21,7 @@ $cnh = $_POST['CNH'];
 
 	if(mysql_num_rows($busca2) == 1){
 			
-		echo "<script>alert('Nome de Usuario ja Existe. Tente Novamente!');top.location.href='fomularioMotorista.html';</script>";
+		echo "<script>alert('Nome de Usuario ja Existe. Tente Novamente!');top.location.href='formularioMotorista.html';</script>";
 
 	}else{
 
@@ -35,20 +35,33 @@ $cnh = $_POST['CNH'];
 	}
 		
 }else if(isset($_POST['PLACA']) && isset($_POST['CHASSI'])){ //usado para inserir os dados da van no banco de dados
+	$Nomeusuario = $_POST['NOME'];
 	
+	$listaMotoristas = "SELECT * FROM MOTORISTA";
+
+	$motorista = mysql_query($listaMotoristas);	
+	// Cada linha vai para um array ($row) usando mysql_fetch_array
+	while($row = mysql_fetch_array($motorista,MYSQL_BOTH)) {// identificando o motorista da seçao 
+		if ($row['NOME_USUARIO'] == $Nomeusuario) {
+			$nome = $row['ID_MOTORISTA']; //acessando o id da tabela motorista da seçao	
+		}
+		
+	}
+
 	$placa = $_POST['PLACA'];
 	$chassi = $_POST['CHASSI'];
 	$ano = $_POST['ANO'];
+	$IdMotorista = $nome; //inserindo o id do motorista 
 
 	$busca2 = mysql_query("SELECT * FROM VAN WHERE PLACA = '$placa'") or die(mysql_error());
-
+	echo "<br />";
 	if(mysql_num_rows($busca2) == 1){
 		echo "<script>alert('A van com essa placa ja esta cadastrada. Tente Novamente!');top.location.href='formularioVan.html';</script>";
 
 	}else{
 
 		$inserir2 = 'INSERT INTO VAN 
-		VALUES ("","'.$placa.'","'.$chassi.'","'.$ano.'","")';
+		VALUES ("","'.$placa.'","'.$chassi.'","'.$ano.'","'.$IdMotorista.'")';
 
 		mysql_query($inserir2,$conexao)or die("Erro!".mysql_error());
 		mysql_close($conexao);
@@ -57,4 +70,5 @@ $cnh = $_POST['CNH'];
 	}
 }
 ?>
+
 
