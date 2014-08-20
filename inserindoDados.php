@@ -54,7 +54,7 @@ $cnh = $_POST['CNH'];
 	$IdMotorista = $nome; //inserindo o id do motorista 
 
 	$busca2 = mysql_query("SELECT * FROM VAN WHERE PLACA = '$placa'") or die(mysql_error());
-	echo "<br />";
+	
 	if(mysql_num_rows($busca2) == 1){
 		echo "<script>alert('A van com essa placa ja esta cadastrada. Tente Novamente!');top.location.href='formularioVan.html';</script>";
 
