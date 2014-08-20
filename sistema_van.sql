@@ -51,6 +51,7 @@ ENGINE = InnoDB;
 -- Table `sistema_van`.`ADMINISTRADOR`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sistema_van`.`ADMINISTRADOR` (
+  `ID_ADMINISTRADOR` INT NOT NULL AUTO_INCREMENT,
   `USUARIO` CHAR(12) NOT NULL,
   `SENHA` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID_ADMINISTRADOR`),
@@ -63,7 +64,7 @@ ENGINE = InnoDB;
 -- Table `sistema_van`.`ROTA`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sistema_van`.`ROTA` (
-  `ID_ROTA` INT NOT NULL,
+  `ID_ROTA` INT NOT NULL AUTO_INCREMENT,
   `ID_MOTORISTA` INT NOT NULL,
   `CIDADE_ORIGEM` VARCHAR(45) NOT NULL,
   `CIDADE_DESTINO` VARCHAR(45) NOT NULL,
@@ -142,7 +143,7 @@ ENGINE = InnoDB;
 -- Table `sistema_van`.`VAN`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sistema_van`.`VAN` (
-  `ID_VAN` INT NOT NULL,
+  `ID_VAN` INT NOT NULL AUTO_INCREMENT,
   `PLACA` CHAR(7) NOT NULL,
   `CHASSI` VARCHAR(45) NOT NULL,
   `ANO` VARCHAR(45) NOT NULL,
