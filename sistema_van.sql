@@ -51,7 +51,6 @@ ENGINE = InnoDB;
 -- Table `sistema_van`.`ADMINISTRADOR`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sistema_van`.`ADMINISTRADOR` (
-  `ID_ADMINISTRADOR` INT NOT NULL,
   `USUARIO` CHAR(12) NOT NULL,
   `SENHA` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID_ADMINISTRADOR`),
