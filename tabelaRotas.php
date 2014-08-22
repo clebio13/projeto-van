@@ -16,7 +16,7 @@
 			<p><h1 >ROTAS</h1></p>
 			<table border="1" align="center">
 			<tr bgcolor="#CCCCCC"> 
-				<td >ID</td>
+				<td >ID Rota</td>
 				<td >Id Motorista</td>
 				<td >Cidade Origem</td>
 				<td >Cidade Destino</td>
