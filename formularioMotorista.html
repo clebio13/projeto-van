@@ -20,10 +20,11 @@
 	<form action="inserindoDados.php" method="POST" class="alinhar">
 		<fieldset>
 			<h1>Criar conta</h1>
-			Nome Usuário (6 - 12 letras e números): <br />
-			<input type="text" name="NOME_USUARIO" placeholder="" autofocus required/><br />
+			Login   (6 - 12 letras e números):<br />
+			<input type="text" name="LOGIN" placeholder=""autofocus required/><br /><br />
 			Criar senha (6 - 12 letras e números): <br />
 			<input type="password" name="SENHA" placeholder="" autofocus required/><br />
+			<input type="hidden" name="NIVEL" value="2" /><br />
 			Email: <br />
 			<input type="text" name="EMAIL" placeholder=""autofocus required/><br />
 			Nome Completo:<br />

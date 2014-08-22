@@ -15,8 +15,8 @@
 			<p><h1 align="center">MOTORISTAS</h1></p>
 			<table border="2">
 			<tr bgcolor="#CCCCCC"> 
-			<td >Nome Usuario</td>	 
-			<td >CNH</td>	    
+			<td >Login</td>	 
+			<td >Nome Completo</td>	    
 			</tr>
 		
 <?php	
@@ -29,20 +29,29 @@
 		header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
 	}
 
+	$strSQL1 = "SELECT * FROM USUARIO WHERE NIVEL = 2";
+
+	$rs1 = mysql_query($strSQL1);	
+	// Cada linha vai para um array ($row) usando mysql_fetch_array
+	while($row = mysql_fetch_array($rs1,MYSQL_BOTH)) {
+		$login = $row['LOGIN'];	
+
+	  	echo "
+		<tr> 
+	    <td>$login</td>";	
+	}
+
 	$strSQL = "SELECT * FROM MOTORISTA";
 
 	$rs = mysql_query($strSQL);	
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
 	while($row = mysql_fetch_array($rs,MYSQL_BOTH)) {
-		$Nomeusuario = $row['NOME_USUARIO'];
-		$cnh = $row['CNH'];
+		$Nome = $row['NOME_COMPLETO'];
 		
-
 	  	echo "
-		<tr> 
-	    <td>$Nomeusuario</td>
-	    <td>$cnh</td>
-	  	</tr>";	
+		
+	    <td>$Nome</td></tr>";
+	  	
 	}
 	// Encerra a conexão
 	mysql_close($conexao);
@@ -56,8 +65,9 @@
 			<fieldset>
 				<h2>Excluir Cadastro: </h2>
 				<p>
-				<input type="text" name="NOME_USUARIO" placeholder="Nome de Usuario" />
-				<input type="text" name="CNH" placeholder="CNH" />
+				<input type="text" name="LOGIN" placeholder="Login" />
+				<input type="text" name="NOME_COMPLETO" placeholder="Nome Completo" />
+				<input type="hidden" name="NIVEL" value="2" /><br />
 				</p>		
 	
 				<p class="botaoAdmin">

@@ -29,5 +29,15 @@
 
 </div>
 </div>
+<?php
+	if(isset($_SESSION['perfil_motorista'])){
+		if($_SESSION['perfil_motorista']){
+			//cadastra van
+		}else{
+			//nao eh motorista
+		}
+    	
+	}
+?>
 </body>
 </html>

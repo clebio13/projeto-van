@@ -17,8 +17,6 @@
 			<table border="1" align="center">
 			<tr bgcolor="#CCCCCC"> 
 				<td >ID</td>
-				<td >Nome Usuario</td>
-				<td >Senha</td>
 				<td >Email</td>
 				<td >Nome Completo</td>
 				<td >Endereco</td>
@@ -43,10 +41,8 @@
 	// Cada linha vai para um array ($row) usando mysql_fetch_array
 	while($row = mysql_fetch_array($rs,MYSQL_BOTH)) {
 		$idMotorista = $row['ID_MOTORISTA'];
-		$nomeusuario = $row['NOME_USUARIO'];
-		$senha = $row['SENHA'];
 		$email = $row['EMAIL'];
-		$nomeCompleto = $row['NOME_COMPLETO'];
+		$nomeCompleto = $row['NOME_COMPLETO'];	
 		$endereco = $row['ENDERECO'];
 		$telefone1 = $row['TELEFONE1'];
 		$telefone2 = $row['TELEFONE2'];
@@ -55,8 +51,6 @@
 	  	echo "
 		<tr> 
 	    <td>$idMotorista</td>
-	    <td>$nomeusuario</td>
-	    <td>$senha</td>
 	    <td>$email</td>
 	    <td>$nomeCompleto</td>
 	    <td>$endereco</td>
