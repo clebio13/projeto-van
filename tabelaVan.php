@@ -24,6 +24,7 @@
 			</tr>
 		
 <?php
+	error_reporting(E_ERROR | E_WARNING | E_PARSE); //ignorando um erro do tipo notice
 	session_start();
 	if(isset($_SESSION['auth'])) {
 		include ("conexao.php");	
@@ -31,8 +32,20 @@
 		session_destroy();
 		header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
 	}
+	//------------------------------
+	$Nomeusuario = $_SESSION['nomeuser'];//identifica o usuario que fez login na seçao
+
+	$usuario = "SELECT * FROM USUARIO";
+	$idusuario = mysql_query($usuario);
+	while($linha = mysql_fetch_array($idusuario,MYSQL_BOTH)) {
+			if ($linha['LOGIN'] == $Nomeusuario) {
+				$id = $linha['ID_USUARIO']; //acessando o id do usuario que fez login
+			}
+			
+		}
+	//--------------------------------	
 		
-	$strSQL = "SELECT * FROM VAN";
+	$strSQL = "SELECT * FROM VAN WHERE ID_MOTORISTA = '$id'"; //exibe so as vans cadastradas do motorista que fez o login
 
 	$rs = mysql_query($strSQL);	
 	// Cada linha vai para um array ($row) usando mysql_fetch_array

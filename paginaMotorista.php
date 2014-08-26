@@ -7,15 +7,24 @@
 
 </head>
 <body>
-	<div id="tudo" align="center">
-	<div class="topo"></div>
-	<div id="conteudo" >
+<div id="tudo" align="center">
+<div class="topo"></div>
+<div id="conteudo" >
 	
 	<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
 	
-		<form class="alinhar">
-			<fieldset>
-			<p><h1 align="center">MOTORISTA</h1></p>
+	<form class="alinhar">
+		<fieldset>
+			<p><h1 align="center">
+			
+			<?php
+			session_start();
+			
+			if(isset($_SESSION['nomeuser'])) {
+				include ("conexao.php");
+				echo "Bem Vindo '".$_SESSION['nomeuser']."'";	
+			}?></h1></p>
+
 			<p class="botaoAdmin">
 				<input type="button" onclick="location.href='formularioVan.html';" value="CADASTRAR VANS" /><br />
 				<input type="button" onclick="location.href='tabelaVan.php';" value="EXIBIR CADASTRO DE VANS" /><br />
@@ -24,12 +33,13 @@
 				<!-- <input type="button" onclick="location.href='';" value="CONSULTAR PASSAGENS VENDIDAS" /><br /> -->
 				<input type="button" onclick="location.href='logout.php';" value="SAIR" />
 			</p>
-</fieldset>
-</form>
+		</fieldset>
+	</form>
 
 </div>
 </div>
 <?php
+/*
 	if(isset($_SESSION['perfil_motorista'])){
 		if($_SESSION['perfil_motorista']){
 			//cadastra van
@@ -37,7 +47,7 @@
 			//nao eh motorista
 		}
     	
-	}
+	}*/
 ?>
 </body>
 </html>

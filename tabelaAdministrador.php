@@ -65,7 +65,7 @@
 	
 	<div>
 	<p class="botaoAdmin">
-	<input type="button" onclick="location.href='paginaAdministrador.html';" value="VOLTAR" />
+	<input type="button" onclick="location.href='paginaAdministrador.php';" value="VOLTAR" />
 	<input type="button" onclick="location.href='gerenciarAdministradores.php';" value="GERENCIAR ADMINISTRADORES" />
 	</p>
 	</div>

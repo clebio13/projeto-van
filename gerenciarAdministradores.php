@@ -57,7 +57,7 @@
 					<p class="botaoAdmin">
 						<input type="submit" name="excluir"value="Excluir" />
 						<input type="reset" name="limpar" value="Limpar" />
-						<input type="button" onclick="location.href='paginaAdministrador.html';" value="Voltar" />
+						<input type="button" onclick="location.href='paginaAdministrador.php';" value="Voltar" />
 					</p >
 				</fieldset>
 			</form>

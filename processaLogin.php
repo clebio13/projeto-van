@@ -13,7 +13,8 @@ $senha = $_POST['senha'];
 
 	while ($row = mysql_fetch_array($sql,MYSQL_BOTH)) {
 		$loginOk = true;
-		$nivel = $row['NIVEL'];
+		$nivel = $row['NIVEL']; //campo nivel usado para redirecionamento de paginas
+		$nome = $row['LOGIN'];
 	}
 }
 
@@ -29,16 +30,19 @@ if ($loginOk) {
 	if ($nivel == 1) {
 		session_start();
 		$_SESSION['auth'] = true;
-		header('LOCATION:paginaAdministrador.html');
+		$_SESSION['nomeuser']  = $nome;
+		header('LOCATION:paginaAdministrador.php');
 
 	}else if($nivel == 2){
 			session_start();
 			$_SESSION['auth'] = true;
+			$_SESSION['nomeuser'] = $nome;
 			header('LOCATION:paginaMotorista.php');
 
 	}else if($nivel == 3){
 			session_start();
 			$_SESSION['auth'] = true;
+			$_SESSION['nomeuser'] = $nome;
 			header('LOCATION:paginaPassageiro.php');		
 	}	
 
