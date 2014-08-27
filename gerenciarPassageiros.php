@@ -67,7 +67,6 @@
 					<h2>Excluir Cadastro: </h2>
 					<p>
 						<input type="text" name="LOGIN" placeholder="Login" />
-						<input type="text" name="NOME_COMPLETO" placeholder="Nome Completo" />
 						<input type="hidden" name="NIVEL" value="3" /><br />
 					</p>		
 	
