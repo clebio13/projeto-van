@@ -1,82 +1,156 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta  charset="utf-8" />
-	<title>Cadastros de Vans</title>
-	<link rel="stylesheet" href="style.css"  media="all" />
-</head>
-
-<body>
-	<div class="tudo" align="center">
-	<div class="topo"></div>
-		<div class="conteudo">
-		
-		<p ><img src="imagens/pegvan.png" width="300" height="100" alt="topo"/></p>
-		
-			<p><h1 >VANS</h1></p>
-			<table border="1" align="center">
-			<tr bgcolor="#CCCCCC"> 
-				<td >ID Van</td>
-				<td >Placa</td>
-				<td >Chassi</td>
-				<td >Ano</td>
-				<td >ID Motorista</td>
-			</tr>
-		
 <?php
-	error_reporting(E_ERROR | E_WARNING | E_PARSE); //ignorando um erro do tipo notice
 	session_start();
-	if(isset($_SESSION['auth'])) {
-		include ("conexao.php");	
-	}else{
-		session_destroy();
-		header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
-	}
-	//------------------------------
-	$Nomeusuario = $_SESSION['nomeuser'];//identifica o usuario que fez login na seçao
+	
+if(isset($_SESSION['auth'])) {
+	include ("conexao.php");	
+}else{
+	session_destroy();
+	header("LOCATION:index.html?msg=SESSAO_FINALIZADA");
+}
+if ($_POST['NIVEL'] == 1) {
+	if (isset($_POST['LOGIN'])) { //usado para excluir cadastro de administradores
 
-	$usuario = "SELECT * FROM USUARIO";
-	$idusuario = mysql_query($usuario);
-	while($linha = mysql_fetch_array($idusuario,MYSQL_BOTH)) {
-			if ($linha['LOGIN'] == $Nomeusuario) {
+		$login = $_POST['LOGIN'];
+		
+		$usuario = "SELECT * FROM USUARIO";
+		$idusuario = mysql_query($usuario);
+		while($linha = mysql_fetch_array($idusuario,MYSQL_BOTH)) {
+			if ($linha['LOGIN'] == $login) {
 				$id = $linha['ID_USUARIO']; //acessando o id do usuario que fez login
 			}
 			
 		}
-	//--------------------------------	
-		
-	$strSQL = "SELECT * FROM VAN WHERE ID_MOTORISTA = '$id'"; //exibe so as vans cadastradas do motorista que fez o login
+		$busca1 = mysql_query("SELECT * FROM USUARIO WHERE ID_USUARIO = '$id' AND NIVEL = 1") or die(mysql_error());
+		$busca2 = mysql_query("SELECT * FROM ADMINISTRADOR WHERE ID_ADMINISTRADOR = '$id'") or die(mysql_error());
 
-	$rs = mysql_query($strSQL);	
-	// Cada linha vai para um array ($row) usando mysql_fetch_array
-	while($row = mysql_fetch_array($rs,MYSQL_BOTH)) {
-		$idvan = $row['ID_VAN'];
-		$placa = $row['PLACA'];
-		$chassi = $row['CHASSI'];
-		$ano = $row['ANO'];
-		$idmotorista = $row['ID_MOTORISTA'];
+		if(mysql_num_rows($busca1) < 1 || mysql_num_rows($busca2) < 1){
+			echo "<script>alert('Nao foi possivel excluir. Tente Novamente!');top.location.href='gerenciarAdministradores.php';</script>";
+		}else{
 
-	  	echo "
-		<tr>
-		<td>$idvan</td> 
-	    <td>$placa</td>
-	    <td>$chassi</td>
-	    <td>$ano</td>
-	    <td>$idmotorista</td>
-	  	</tr>";	
+
+
+				$delete5 = "DELETE FROM USUARIO WHERE ID_USUARIO ='$id' AND NIVEL = 1";
+				$delete6 = "DELETE FROM ADMINISTRADOR WHERE ID_ADMINISTRADOR ='$id'";
+
+				mysql_query($delete6)or die("Erro!".mysql_error());
+				mysql_query($delete5)or die("Erro2!".mysql_error());
+				mysql_close($conexao);
+
+				header('location:gerenciarAdministradores.php');
+		}
 	}
-	// Encerra a conexão
-	mysql_close($conexao);
-?>
-		</table>
-	<div>
-		<p class="botaoAdmin">
-		<input type="button" onclick="location.href='paginaMotorista.php';" value="VOLTAR" />
+}else if ($_POST['NIVEL'] == 2) { //usado para excluir cadastro de motoristas
 		
-		<input type="button" onclick="location.href='gerenciarVans.php';" value="GERENCIAR VANS" />
-		</p>
-	</div>
-</div>
-</div>
-</body>
-</html>
+		$login = $_POST['LOGIN'];
+		
+		//---------------------------
+		$usuario = "SELECT * FROM USUARIO";
+		$idusuario = mysql_query($usuario);
+		while($linha = mysql_fetch_array($idusuario,MYSQL_BOTH)) {
+			if ($linha['LOGIN'] == $login) {
+				$id = $linha['ID_USUARIO']; //acessando o id do usuario que fez login
+			}
+			
+		}
+		//---------------------------
+		$busca1 = mysql_query("SELECT * FROM USUARIO WHERE ID_USUARIO = '$id' AND NIVEL = 2") or die(mysql_error());
+		$busca2 = mysql_query("SELECT * FROM MOTORISTA WHERE ID_MOTORISTA = '$id'") or die(mysql_error());
+
+		if(mysql_num_rows($busca1) < 1 || mysql_num_rows($busca2) < 1){
+			echo "<script>alert('Nao foi possivel excluir. Tente Novamente!');top.location.href='gerenciarMotoristas.php';</script>";
+		}else{
+				$buscaMotoristaPossuiVan = mysql_query("SELECT * FROM VAN WHERE ID_MOTORISTA = '$id'") or die(mysql_error()); 
+				
+				if ($buscaMotoristaPossuiVan > 0) { //verifica se motorista possui alguma van cadastrada 
+					$buscaVanPossuiRota = mysql_query("SELECT * FROM ROTA WHERE ID_MOTORISTA = '$id'") or die(mysql_error()); 
+					
+					if ($buscaVanPossuiRota > 0) { //verifica se van possui alguma rota cadastrada
+						$deleteRota = "DELETE FROM ROTA WHERE ID_MOTORISTA ='$id'";
+						mysql_query($deleteRota)or die("Erro ao Deletar Rota!".mysql_error());	
+					}
+					$deleteVan = "DELETE FROM VAN WHERE ID_MOTORISTA ='$id'";
+					mysql_query($deleteVan)or die("Erro ao Deletar Van!".mysql_error());
+				}
+
+				$delete = "DELETE FROM USUARIO WHERE ID_USUARIO ='$id' AND NIVEL = 2";
+				$delete2 = "DELETE FROM MOTORISTA WHERE ID_MOTORISTA ='$id'";
+
+				mysql_query($delete2)or die("Erro!".mysql_error());
+				mysql_query($delete)or die("Erro2!".mysql_error());
+				mysql_close($conexao);
+
+				header('location:gerenciarMotoristas.php');	
+		}
+	
+}elseif ($_POST['NIVEL'] == 3){//usado para excluir cadastro de passageiro
+
+		$login = $_POST['LOGIN'];
+		
+		//---------------------------
+		$usuario = "SELECT * FROM USUARIO";
+		$idusuario = mysql_query($usuario);
+		while($linha = mysql_fetch_array($idusuario,MYSQL_BOTH)) {
+			if ($linha['LOGIN'] == $login) {
+				$id = $linha['ID_USUARIO']; //acessando o id do usuario que fez login
+			}
+			
+		}
+		
+		//---------------------------
+		
+		$busca3 = mysql_query("SELECT * FROM USUARIO WHERE ID_USUARIO = '$id' AND NIVEL = 3") or die(mysql_error());
+		$busca4 = mysql_query("SELECT * FROM PASSAGEIRO WHERE ID_PASSAGEIRO = '$id'") or die(mysql_error());
+
+		if(mysql_num_rows($busca3) < 1 || mysql_num_rows($busca4) < 1){
+			echo "<script>alert('Nao foi possivel excluir. Tente Novamente!');top.location.href='gerenciarPassageiros.php';</script>";
+		}else{
+
+				$delete3 = "DELETE FROM USUARIO WHERE ID_USUARIO ='$id' AND NIVEL = 3";
+				$delete4 = "DELETE FROM PASSAGEIRO WHERE ID_PASSAGEIRO ='$id'";
+
+				mysql_query($delete4)or die("Erro!".mysql_error());
+				mysql_query($delete3)or die("Erro2!".mysql_error());
+				mysql_close($conexao);
+
+				header('location:gerenciarPassageiros.php');	
+		}
+}else if(isset($_POST['PLACA'])) { //usado para excluir cadastro de vans
+
+	$placa = $_POST['PLACA'];
+
+	$busca3 = mysql_query("SELECT * FROM VAN WHERE PLACA = '$placa'") or die(mysql_error());
+
+	if(mysql_num_rows($busca3 < 1)){
+		echo "<script>alert('Veiculo com a placa digitada nao esta cadastrado no sistema!');top.location.href='paginaAdministrador.html';</script>";		
+	}else{
+		
+		$delete3 = "DELETE FROM VAN WHERE PLACA ='$placa'";
+
+		mysql_query($delete3)or die("Erro!".mysql_error());
+		mysql_close($conexao);
+
+		header('location:paginaMotorista.php');
+	}
+
+}else if(isset($_POST['ID_ROTA'])) { //usado para excluir cadastro de vans
+
+	$idRota = $_POST['ID_ROTA'];
+
+	$busca3 = mysql_query("SELECT * FROM ROTA WHERE ID_ROTA = '$idRota'") or die(mysql_error());
+
+	if(mysql_num_rows($busca3 < 1)){
+		echo "<script>alert('A rota nao esta cadastrada no sistema!');top.location.href='paginaAdministrador.html';</script>";		
+	}else{
+		$delete3 = "DELETE FROM ROTA WHERE ID_ROTA ='$idRota'";
+
+		mysql_query($delete3)or die("Erro!".mysql_error());
+		mysql_close($conexao);
+
+		header('location:paginaMotorista.php');
+	}
+
+}
+
+?>
+
+
