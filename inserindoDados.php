@@ -22,10 +22,13 @@ if ($_POST['NIVEL'] == 1) {
 				$inserir1 = 'INSERT INTO USUARIO 
 				VALUES ("","'.$login.'","'.$senha.'","'.$nivel.'")';
 
-				$inserir2 = 'INSERT INTO ADMINISTRADOR 
-				VALUES ("")';
-				
 				mysql_query($inserir1,$conexao)or die("Erro!".mysql_error());
+
+				$copiaid = mysql_insert_id();//pega o id do insert anterior
+
+				$inserir2 = 'INSERT INTO ADMINISTRADOR 
+				VALUES ("'.$copiaid.'")';
+			
 				mysql_query($inserir2,$conexao)or die("Erro2!".mysql_error());
 				
 				
@@ -191,4 +194,5 @@ else if(isset($_POST['PLACA']) && isset($_POST['CHASSI'])){ //usado para inserir
 }
 
 ?>
+
 
