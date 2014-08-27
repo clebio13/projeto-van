@@ -29,19 +29,42 @@ if ($_POST['NIVEL'] == 1) {
 }else if ($_POST['NIVEL'] == 2) { //usado para excluir cadastro de motoristas
 		
 		$login = $_POST['LOGIN'];
-		$nomeCompleto = $_POST['NOME_COMPLETO'];
 		
-		$busca1 = mysql_query("SELECT * FROM USUARIO WHERE LOGIN = '$login' AND NIVEL = 2") or die(mysql_error());
-		$busca2 = mysql_query("SELECT * FROM MOTORISTA WHERE NOME_COMPLETO = '$nomeCompleto'") or die(mysql_error());
+		//---------------------------
+		$usuario = "SELECT * FROM USUARIO";
+		$idusuario = mysql_query($usuario);
+		while($linha = mysql_fetch_array($idusuario,MYSQL_BOTH)) {
+			if ($linha['LOGIN'] == $login) {
+				$id = $linha['ID_USUARIO']; //acessando o id do usuario que fez login
+			}
+			
+		}
+		
+		//---------------------------
+		$busca1 = mysql_query("SELECT * FROM USUARIO WHERE ID_USUARIO = '$id' AND NIVEL = 2") or die(mysql_error());
+		$busca2 = mysql_query("SELECT * FROM MOTORISTA WHERE ID_MOTORISTA = '$id'") or die(mysql_error());
 
 		if(mysql_num_rows($busca1) < 1 || mysql_num_rows($busca2) < 1){
 			echo "<script>alert('Nao foi possivel excluir. Tente Novamente!');top.location.href='gerenciarMotoristas.php';</script>";
 		}else{
-				$delete = "DELETE FROM USUARIO WHERE LOGIN ='$login' AND NIVEL = 2";
-				$delete2 = "DELETE FROM MOTORISTA WHERE NOME_COMPLETO ='$nomeCompleto'";
+				$buscaMotoristaPossuiVan = mysql_query("SELECT * FROM VAN WHERE ID_MOTORISTA = '$id'") or die(mysql_error()); 
+				
+				if ($buscaMotoristaPossuiVan > 0) { //verifica se motorista possui alguma van cadastrada 
+					$buscaVanPossuiRota = mysql_query("SELECT * FROM ROTA WHERE ID_MOTORISTA = '$id'") or die(mysql_error()); 
+					
+					if ($buscaVanPossuiRota > 0) { //verifica se van possui alguma rota cadastrada
+						$deleteRota = "DELETE FROM ROTA WHERE ID_MOTORISTA ='$id'";
+						mysql_query($deleteRota)or die("Erro ao Deletar Rota!".mysql_error());	
+					}
+					$deleteVan = "DELETE FROM VAN WHERE ID_MOTORISTA ='$id'";
+					mysql_query($deleteVan)or die("Erro ao Deletar Van!".mysql_error());
+				}
 
-				mysql_query($delete)or die("Erro!".mysql_error());
-				mysql_query($delete2)or die("Erro2!".mysql_error());
+				$delete = "DELETE FROM USUARIO WHERE ID_USUARIO ='$id' AND NIVEL = 2";
+				$delete2 = "DELETE FROM MOTORISTA WHERE ID_MOTORISTA ='$id'";
+
+				mysql_query($delete2)or die("Erro!".mysql_error());
+				mysql_query($delete)or die("Erro2!".mysql_error());
 				mysql_close($conexao);
 
 				header('location:gerenciarMotoristas.php');	
@@ -50,16 +73,28 @@ if ($_POST['NIVEL'] == 1) {
 }elseif ($_POST['NIVEL'] == 3){//usado para excluir cadastro de passageiro
 
 		$login = $_POST['LOGIN'];
-		$nomeCompleto = $_POST['NOME_COMPLETO'];
 		
-		$busca3 = mysql_query("SELECT * FROM USUARIO WHERE LOGIN = '$login' AND NIVEL = 3") or die(mysql_error());
-		$busca4 = mysql_query("SELECT * FROM PASSAGEIRO WHERE NOME_COMPLETO = '$nomeCompleto'") or die(mysql_error());
+		//---------------------------
+		$usuario = "SELECT * FROM USUARIO";
+		$idusuario = mysql_query($usuario);
+		while($linha = mysql_fetch_array($idusuario,MYSQL_BOTH)) {
+			if ($linha['LOGIN'] == $login) {
+				$id = $linha['ID_USUARIO']; //acessando o id do usuario que fez login
+			}
+			
+		}
+		
+		//---------------------------
+		
+		$busca3 = mysql_query("SELECT * FROM USUARIO WHERE ID_USUARIO = '$id' AND NIVEL = 3") or die(mysql_error());
+		$busca4 = mysql_query("SELECT * FROM PASSAGEIRO WHERE ID_PASSAGEIRO = '$id'") or die(mysql_error());
 
 		if(mysql_num_rows($busca3) < 1 || mysql_num_rows($busca4) < 1){
 			echo "<script>alert('Nao foi possivel excluir. Tente Novamente!');top.location.href='gerenciarPassageiros.php';</script>";
 		}else{
-				$delete3 = "DELETE FROM USUARIO WHERE LOGIN ='$login' AND NIVEL = 3";
-				$delete4 = "DELETE FROM PASSAGEIRO WHERE NOME_COMPLETO ='$nomeCompleto'";
+
+				$delete3 = "DELETE FROM USUARIO WHERE ID_USUARIO ='$id' AND NIVEL = 3";
+				$delete4 = "DELETE FROM PASSAGEIRO WHERE ID_PASSAGEIRO ='$id'";
 
 				mysql_query($delete4)or die("Erro!".mysql_error());
 				mysql_query($delete3)or die("Erro2!".mysql_error());
@@ -76,6 +111,7 @@ if ($_POST['NIVEL'] == 1) {
 	if(mysql_num_rows($busca3 < 1)){
 		echo "<script>alert('Veiculo com a placa digitada nao esta cadastrado no sistema!');top.location.href='paginaAdministrador.html';</script>";		
 	}else{
+		
 		$delete3 = "DELETE FROM VAN WHERE PLACA ='$placa'";
 
 		mysql_query($delete3)or die("Erro!".mysql_error());
@@ -104,5 +140,4 @@ if ($_POST['NIVEL'] == 1) {
 }
 
 ?>
-
 
